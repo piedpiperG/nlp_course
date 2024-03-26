@@ -1,5 +1,7 @@
 import numpy as np
 from scipy.linalg import svd
+from scipy.sparse import lil_matrix
+from scipy.sparse.linalg import svds
 
 
 class Svd_dec:
@@ -24,34 +26,40 @@ class Svd_dec:
         return processed_sentences
 
     def build_cooccurrence_matrix(self, sentences):
-        """构建共现矩阵"""
-        # 统计所有唯一词汇并创建词汇索引
         vocab = set(word for sentence in sentences for word in sentence.split())
         vocab_index = {word: i for i, word in enumerate(vocab)}
 
-        # 初始化共现矩阵
-        cooccurrence_matrix = np.zeros((len(vocab), len(vocab)), dtype=np.int32)
+        # 使用 lil_matrix 初始化稀疏共现矩阵，并指定为浮点数据类型
+        cooccurrence_matrix = lil_matrix((len(vocab), len(vocab)), dtype=np.float32)
 
         for sentence in sentences:
             words = sentence.split()
             for i, word in enumerate(words):
                 target_word_index = vocab_index[word]
-                # 为每个词汇定义窗口内的词汇
                 start = max(0, i - self.window_size)
                 end = min(len(words), i + self.window_size + 1)
                 for j in range(start, end):
-                    if i != j:  # 避免自身计数
+                    if i != j:
                         context_word_index = vocab_index[words[j]]
                         cooccurrence_matrix[target_word_index, context_word_index] += 1
 
-        return cooccurrence_matrix, vocab_index
+        return cooccurrence_matrix.tocsr(), vocab_index  # 将结果转换为 CSR 格式
 
     def apply_svd(self, cooccurrence_matrix):
-        """对共现矩阵应用SVD分解，并保留前k个奇异值"""
         k = self.k
-        U, Sigma, VT = svd(cooccurrence_matrix, full_matrices=False)
-        # 仅保留前k个特征向量
-        U_k = U[:, :k]
+        # 对稀疏共现矩阵应用 SVD 分解
+        U, Sigma, VT = svds(cooccurrence_matrix, k=k)
+        U_k = U
+
+        # 分析奇异值
+        total_singular_values = np.linalg.norm(cooccurrence_matrix, ord='nuc')  # 计算全部奇异值之和
+        selected_singular_values_sum = np.sum(Sigma)  # 计算选取的奇异值之和
+        ratio = selected_singular_values_sum / total_singular_values  # 计算比例
+
+        print(f"选取的奇异值之和: {selected_singular_values_sum}")
+        print(f"全部奇异值之和: {total_singular_values}")
+        print(f"二者的比例: {ratio}")
+
         return U_k
 
     def cosine_similarity(self, vec1, vec2):
@@ -87,6 +95,7 @@ if __name__ == '__main__':
 
     # 对training.txt文件进行预处理，包括分词、去除停用词（如果需要）等操作，以获得文本的基本单位（如词或子词）。
     processed_sentences = svd_dec.preprocess_file()
+    print(processed_sentences[0:10])
     # 构建共现矩阵：基于预处理后的语料，构建一个共现矩阵。在这个矩阵中，行和列分别代表语料库中的唯一词汇，矩阵中的每个元素代表对应行词和列词共同出现在一定窗口大小内的次数。
     cooccurrence_matrix, vocab_index = svd_dec.build_cooccurrence_matrix(processed_sentences)
     # 应用SVD分解：对共现矩阵应用奇异值分解（SVD），以减少特征空间的维度。这里可以选择降维后的维数，但要保持K=5。
