@@ -18,7 +18,7 @@ class Svd_dec:
         with open(self.stopwords_path, 'r', encoding='utf-8') as f:
             stopwords = set([line.strip() for line in f])
         processed_sentences = []
-        with open(self.train_path, 'r', encoding='gbk') as f:
+        with open(self.train_path, 'r', encoding='utf-8') as f:
             for line in f:
                 words = line.strip().split()
                 filtered_words = [word for word in words if word not in stopwords and word.strip() != '']
@@ -52,13 +52,13 @@ class Svd_dec:
         U_k = U
 
         # 分析奇异值
-        total_singular_values = np.linalg.norm(cooccurrence_matrix, ord='nuc')  # 计算全部奇异值之和
-        selected_singular_values_sum = np.sum(Sigma)  # 计算选取的奇异值之和
-        ratio = selected_singular_values_sum / total_singular_values  # 计算比例
-
-        print(f"选取的奇异值之和: {selected_singular_values_sum}")
-        print(f"全部奇异值之和: {total_singular_values}")
-        print(f"二者的比例: {ratio}")
+        # total_singular_values = np.linalg.norm(cooccurrence_matrix, ord='nuc')  # 计算全部奇异值之和
+        # selected_singular_values_sum = np.sum(Sigma)  # 计算选取的奇异值之和
+        # ratio = selected_singular_values_sum / total_singular_values  # 计算比例
+        #
+        # print(f"选取的奇异值之和: {selected_singular_values_sum}")
+        # print(f"全部奇异值之和: {total_singular_values}")
+        # print(f"二者的比例: {ratio}")
 
         return U_k
 
@@ -95,7 +95,6 @@ if __name__ == '__main__':
 
     # 对training.txt文件进行预处理，包括分词、去除停用词（如果需要）等操作，以获得文本的基本单位（如词或子词）。
     processed_sentences = svd_dec.preprocess_file()
-    print(processed_sentences[0:10])
     # 构建共现矩阵：基于预处理后的语料，构建一个共现矩阵。在这个矩阵中，行和列分别代表语料库中的唯一词汇，矩阵中的每个元素代表对应行词和列词共同出现在一定窗口大小内的次数。
     cooccurrence_matrix, vocab_index = svd_dec.build_cooccurrence_matrix(processed_sentences)
     # 应用SVD分解：对共现矩阵应用奇异值分解（SVD），以减少特征空间的维度。这里可以选择降维后的维数，但要保持K=5。
@@ -103,6 +102,14 @@ if __name__ == '__main__':
     # 计算词向量相似度：使用SVD分解的结果获取每个词的向量表示。然后，基于这些向量，计算pku_sim_test.txt中每一行两个词的余弦相似度。如果某个词在training.txt中没有出现，将这对词的相似度设为0。
     similarities = svd_dec.calculate_similarity_pairs(reduced_matrix, vocab_index)
 
+    similarities_svd = []
     # 打印结果
     for word1, word2, similarity in similarities:
-        print(f"{word1} - {word2}: {similarity}")
+        # print(f"{word1} - {word2}: {similarity}")
+        similarities_svd.append((word1, word2, similarity))
+    print(similarities_svd)
+
+    # 写入SVD数据到文件
+    with open('../result/similarties.txt', 'w', encoding='utf-8') as f:
+        for word1, word2, sim_sv in similarities_svd:
+            f.write(f"{word1} - {word2}: {sim_sv}\n")
