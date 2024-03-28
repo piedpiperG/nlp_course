@@ -109,7 +109,15 @@ if __name__ == '__main__':
         similarities_svd.append((word1, word2, similarity))
     print(similarities_svd)
 
-    # 写入SVD数据到文件
-    with open('../result/similarties.txt', 'w', encoding='utf-8') as f:
-        for word1, word2, sim_sv in similarities_svd:
-            f.write(f"{word1} - {word2}: {sim_sv}\n")
+    # 读取原始文件
+    with open('../result/similarties.txt', 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+    # 修改每一行，追加SGNS相似度数据
+    modified_lines = []
+    for line, (_, _, sim_svd) in zip(lines, similarities_svd):
+        modified_line = line.strip() + f"\t{sim_svd}\n"  # 追加SGNS数据
+        modified_lines.append(modified_line)
+
+    # 将修改后的内容写回到新文件或覆盖原文件
+    with open('../result/similarties.txt', 'w', encoding='utf-8') as file:
+        file.writelines(modified_lines)

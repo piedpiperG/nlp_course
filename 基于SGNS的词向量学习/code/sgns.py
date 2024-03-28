@@ -16,40 +16,29 @@ import pickle
 
 
 class SGNSModel(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim):
+    def __init__(self, vocab_size, embedding_dim):
         super(SGNSModel, self).__init__()
         # 中心词嵌入层
         self.center_embeddings = nn.Embedding(vocab_size, embedding_dim)
         # 上下文词嵌入层
         self.context_embeddings = nn.Embedding(vocab_size, embedding_dim)
 
-        # 非线性映射层
-        self.fc1 = nn.Linear(embedding_dim, hidden_dim)
-        self.fc2 = nn.Linear(hidden_dim, embedding_dim)
-
-        # 激活函数
-        self.relu = nn.ReLU()
-
-        # Dropout层
-        self.dropout = nn.Dropout(0.5)
-
     def forward(self, center_word_indices, context_word_indices, negative_word_indices):
         # 查找中心词和上下文词的嵌入
         center_embeds = self.center_embeddings(center_word_indices)
         context_embeds = self.context_embeddings(context_word_indices)
-
-        # 应用非线性映射
-        center_embeds = self.dropout(self.relu(self.fc1(center_embeds)))
-        center_embeds = self.fc2(center_embeds)
 
         # 计算正样本对的得分
         positive_scores = torch.sum(center_embeds * context_embeds, dim=1)
 
         # 查找负样本的嵌入并计算得分
         negative_embeds = self.context_embeddings(negative_word_indices)
+
+        # 负样本得分的计算稍有不同，需要额外的维度操作
         negative_scores = torch.bmm(negative_embeds, center_embeds.unsqueeze(2)).squeeze(2)
 
         # 计算损失
+        # 正样本标签是1，负样本标签是0
         positive_loss = F.binary_cross_entropy_with_logits(positive_scores, torch.ones_like(positive_scores))
         negative_loss = F.binary_cross_entropy_with_logits(negative_scores, torch.zeros_like(negative_scores))
 
@@ -105,6 +94,7 @@ class Data_prepare:
             for word in sentence.split():
                 if word not in vocab:
                     vocab[word] = len(vocab)
+        self.vocab = vocab
         return vocab
 
     def generate_training_data(self, num_negative_samples=5):
@@ -135,7 +125,7 @@ class Data_prepare:
         return positive_pairs, negative_samples
 
     def pre_data(self):
-        self.processed_sentences()
+        self.preprocess_file()
         self.build_vocab()
         positive_pairs, negative_samples = self.generate_training_data()
 
@@ -148,7 +138,7 @@ class Data_prepare:
 
 
 # 定义训练过程
-def train(model, data_loader, optimizer, epochs=5):
+def train_process(model, data_loader, optimizer, device, epochs=5):
     model.train()
     for epoch in range(epochs):
         total_loss = 0
@@ -204,10 +194,9 @@ def test(test_path):
     len_vocab = len(vocab)
 
     # 实例化模型
-    embedding_dim = 200  # 嵌入向量的维度
-    hidden_dim = 400
+    embedding_dim = 100  # 嵌入向量的维度
     vocab_size = len_vocab  # 假定的词汇表大小
-    model = SGNSModel(vocab_size, embedding_dim, hidden_dim)
+    model = SGNSModel(vocab_size, embedding_dim)
     model.load_state_dict(torch.load('sgns_model.pth'))
 
     # 进行预测
@@ -227,42 +216,45 @@ def test(test_path):
         file.writelines(modified_lines)
 
 
+def train(stopwords_path, train_path, window_size):
+    # 预处理获取训练数据
+    data_prepare = Data_prepare(stopwords_path, train_path, window_size)
+    positive_pairs, negative_samples, len_vocab, vocab = data_prepare.pre_data()
+    dataset = Word2VecDataset(positive_pairs, negative_samples)
+    data_loader = DataLoader(dataset, batch_size=5096000, shuffle=True)
+
+    # 实例化模型
+    embedding_dim = 100  # 嵌入向量的维度
+
+    vocab_size = len_vocab  # 假定的词汇表大小
+    model = SGNSModel(vocab_size, embedding_dim)
+
+    # 开始训练
+    # 定义设备
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+    # 定义优化器
+    optimizer = optim.Adam(model.parameters(), lr=0.003)
+
+    # 训练
+    train_process(model, data_loader, optimizer, device)
+
+    # 保存模型和词向量
+    # 保存模型参数
+    torch.save(model.state_dict(), 'sgns_model.pth')
+    # 保存词向量
+    word_vectors = model.center_embeddings.weight.data
+    torch.save(word_vectors, 'word_vectors.pth')
+    # 保存词汇表
+    with open('vocab.pkl', 'wb') as f:
+        pickle.dump(vocab, f)
+
+
 if __name__ == '__main__':
     stopwords_path = '../data/stopwords.txt'
     train_path = '../data/training.txt'
     test_path = '../data/pku_sim_test.txt'
     window_size = 5
 
-    test(test_path)
-
-    # # 预处理获取训练数据
-    # data_prepare = Data_prepare(stopwords_path, train_path, window_size)
-    # positive_pairs, negative_samples, len_vocab, vocab = data_prepare.pre_data()
-    # dataset = Word2VecDataset(positive_pairs, negative_samples)
-    # data_loader = DataLoader(dataset, batch_size=1024000, shuffle=True)
-    #
-    # # 实例化模型
-    # embedding_dim = 200  # 嵌入向量的维度
-    # hidden_dim = 400
-    # vocab_size = len_vocab  # 假定的词汇表大小
-    # model = SGNSModel(vocab_size, embedding_dim, hidden_dim)
-    #
-    # # 开始训练
-    # # 定义设备
-    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    # model.to(device)
-    # # 定义优化器
-    # optimizer = optim.Adam(model.parameters(), lr=0.003)
-    #
-    # # 训练
-    # train(model, data_loader, optimizer)
-    #
-    # # 保存模型和词向量
-    # # 保存模型参数
-    # torch.save(model.state_dict(), 'sgns_model.pth')
-    # # 保存词向量
-    # word_vectors = model.center_embeddings.weight.data
-    # torch.save(word_vectors, 'word_vectors.pth')
-    # # 保存词汇表
-    # with open('vocab.pkl', 'wb') as f:
-    #     pickle.dump(vocab, f)
+    train(stopwords_path, train_path, window_size)
+    # test(test_path)
