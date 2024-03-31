@@ -2,9 +2,11 @@ import random
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from matplotlib import pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 import torch.optim as optim
 import pickle
+import time
 
 """
 定义模型
@@ -22,6 +24,10 @@ class SGNSModel(nn.Module):
         self.center_embeddings = nn.Embedding(vocab_size, embedding_dim)
         # 上下文词嵌入层
         self.context_embeddings = nn.Embedding(vocab_size, embedding_dim)
+        self.embedding_dim = embedding_dim
+
+        # 初始化权重
+        self.init_weights()
 
     def forward(self, center_word_indices, context_word_indices, negative_word_indices):
         # 查找中心词和上下文词的嵌入
@@ -30,22 +36,28 @@ class SGNSModel(nn.Module):
 
         # 计算正样本对的得分
         positive_scores = torch.sum(center_embeds * context_embeds, dim=1)
+        # 使用logsigmoid处理正样本得分
+        log_target = F.logsigmoid(positive_scores)
 
         # 查找负样本的嵌入并计算得分
         negative_embeds = self.context_embeddings(negative_word_indices)
-
         # 负样本得分的计算稍有不同，需要额外的维度操作
         negative_scores = torch.bmm(negative_embeds, center_embeds.unsqueeze(2)).squeeze(2)
+        # 使用logsigmoid处理负样本得分
+        sum_log_sampled = F.logsigmoid(-1 * negative_scores)
 
-        # 计算损失
-        # 正样本标签是1，负样本标签是0
-        positive_loss = F.binary_cross_entropy_with_logits(positive_scores, torch.ones_like(positive_scores))
-        negative_loss = F.binary_cross_entropy_with_logits(negative_scores, torch.zeros_like(negative_scores))
-
-        # 最终损失是正负样本损失的和
-        loss = positive_loss + negative_loss.mean()  # 对负样本损失取平均
+        # 损失是正样本和负样本得分的logsigmoid之和的负数
+        loss = -1 * (log_target.sum() + sum_log_sampled.sum()) / (len(positive_scores) + len(negative_scores))
 
         return loss
+
+    # 前向传播代码保持不变
+
+    def init_weights(self):
+        # Xavier初始化的一种常见选择是使用均匀分布
+        initrange = 0.5 / self.embedding_dim
+        self.center_embeddings.weight.data.uniform_(-initrange, initrange)
+        self.context_embeddings.weight.data.uniform_(-initrange, initrange)
 
 
 class Word2VecDataset(Dataset):
@@ -138,11 +150,14 @@ class Data_prepare:
 
 
 # 定义训练过程
-def train_process(model, data_loader, optimizer, device, epochs=5):
+def train_process(model, data_loader, optimizer, device, epochs=15):
     model.train()
+    loss_values = []  # 用于存储每个epoch的平均损失
+    batch_loss_values = []  # 用于存储每200个batch的损失
     for epoch in range(epochs):
+        start_time = time.time()  # 记录每个epoch开始的时间
         total_loss = 0
-        for center, context, negatives in data_loader:
+        for batch_idx, (center, context, negatives) in enumerate(data_loader):
             center = center.to(device)
             context = context.to(device)
             negatives = negatives.to(device)
@@ -154,7 +169,56 @@ def train_process(model, data_loader, optimizer, device, epochs=5):
 
             total_loss += loss.item()
 
-        print(f"Epoch {epoch + 1}, Loss: {total_loss / len(data_loader)}")
+            # 特定批次打印时间和损失信息
+            if (batch_idx + 1) % 200 == 0:  # 假设每200个batch打印一次
+                elapsed = time.time() - start_time
+                print(
+                    f"Epoch {epoch + 1}, Batch {batch_idx + 1}, Current Loss: {loss.item()}, Time elapsed: {elapsed:.2f} seconds")
+                batch_loss_values.append(loss.item())  # 将当前损失加入列表
+            if (batch_idx + 1) % 5000 == 0:  # 假设每200个batch打印一次
+                # 保存模型和词向量
+                # 保存模型参数
+                torch.save(model.state_dict(), 'sgns_model.pth')
+                # 保存词向量
+                word_vectors = model.center_embeddings.weight.data
+                torch.save(word_vectors, 'word_vectors.pth')
+
+                test(test_path, embedding_dim)
+
+        # 绘制每200个batch的损失变化
+        plt.figure(figsize=(10, 5))
+        plt.plot(batch_loss_values, label='Batch Loss')
+        plt.xlabel('Batch (every 200th)')
+        plt.ylabel('Loss')
+        plt.title('Loss During Training (per 200 batches)')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(f'../result/batch_loss_epoch{epoch+1}.png')  # 保存损失图像到本地
+        plt.show()  # 显示图像
+
+    # 保存模型和词向量
+    # 保存模型参数
+    torch.save(model.state_dict(), 'sgns_model.pth')
+    # 保存词向量
+    word_vectors = model.center_embeddings.weight.data
+    torch.save(word_vectors, 'word_vectors.pth')
+
+    test(test_path, embedding_dim)
+
+    average_loss = total_loss / len(data_loader)
+    print(f"Epoch {epoch + 1}, Loss: {average_loss}")
+    loss_values.append(average_loss)
+
+    # 绘制损失图
+    plt.figure(figsize=(10, 5))
+    plt.plot(loss_values, label='Training Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Loss During Training')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig('training_loss.png')  # 保存损失图像到本地
+    plt.show()  # 显示图像
 
 
 # 计算余弦相似度
@@ -185,7 +249,7 @@ def predict_similarity(test_path, vocab, word_vectors):
     return similarities_sgns
 
 
-def test(test_path):
+def test(test_path, embedding_dim):
     # 加载词向量
     word_vectors = torch.load('word_vectors.pth')
     # 加载词汇表
@@ -194,7 +258,6 @@ def test(test_path):
     len_vocab = len(vocab)
 
     # 实例化模型
-    embedding_dim = 100  # 嵌入向量的维度
     vocab_size = len_vocab  # 假定的词汇表大小
     model = SGNSModel(vocab_size, embedding_dim)
     model.load_state_dict(torch.load('sgns_model.pth'))
@@ -216,16 +279,18 @@ def test(test_path):
         file.writelines(modified_lines)
 
 
-def train(stopwords_path, train_path, window_size):
+def train(stopwords_path, train_path, window_size, embedding_dim):
     # 预处理获取训练数据
     data_prepare = Data_prepare(stopwords_path, train_path, window_size)
     positive_pairs, negative_samples, len_vocab, vocab = data_prepare.pre_data()
     dataset = Word2VecDataset(positive_pairs, negative_samples)
-    data_loader = DataLoader(dataset, batch_size=5096000, shuffle=True)
+    data_loader = DataLoader(dataset, batch_size=16, shuffle=True)
+
+    # 保存词汇表
+    with open('vocab.pkl', 'wb') as f:
+        pickle.dump(vocab, f)
 
     # 实例化模型
-    embedding_dim = 100  # 嵌入向量的维度
-
     vocab_size = len_vocab  # 假定的词汇表大小
     model = SGNSModel(vocab_size, embedding_dim)
 
@@ -239,16 +304,6 @@ def train(stopwords_path, train_path, window_size):
     # 训练
     train_process(model, data_loader, optimizer, device)
 
-    # 保存模型和词向量
-    # 保存模型参数
-    torch.save(model.state_dict(), 'sgns_model.pth')
-    # 保存词向量
-    word_vectors = model.center_embeddings.weight.data
-    torch.save(word_vectors, 'word_vectors.pth')
-    # 保存词汇表
-    with open('vocab.pkl', 'wb') as f:
-        pickle.dump(vocab, f)
-
 
 if __name__ == '__main__':
     stopwords_path = '../data/stopwords.txt'
@@ -256,5 +311,6 @@ if __name__ == '__main__':
     test_path = '../data/pku_sim_test.txt'
     window_size = 5
 
-    train(stopwords_path, train_path, window_size)
-    # test(test_path)
+    embedding_dim = 200
+    train(stopwords_path, train_path, window_size, embedding_dim)
+    test(test_path, embedding_dim)
