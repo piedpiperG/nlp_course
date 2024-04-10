@@ -1,63 +1,13 @@
-import random
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from matplotlib import pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 import torch.optim as optim
 import pickle
 import time
+import os
 
-"""
-定义模型
-在PyTorch中定义一个简单的模型，包含词嵌入层和负采样逻辑。
-
-定义嵌入层：使用torch.nn.Embedding为中心词和上下文词创建两个嵌入层。
-负采样：利用PyTorch的torch.nn.functional.nll_loss（负对数似然损失）实现负采样。这需要正确地选择负样本。
-"""
-
-
-class SGNSModel(nn.Module):
-    def __init__(self, vocab_size, embedding_dim):
-        super(SGNSModel, self).__init__()
-        # 中心词嵌入层
-        self.center_embeddings = nn.Embedding(vocab_size, embedding_dim)
-        # 上下文词嵌入层
-        self.context_embeddings = nn.Embedding(vocab_size, embedding_dim)
-        self.embedding_dim = embedding_dim
-
-        # 初始化权重
-        self.init_weights()
-
-    def forward(self, center_word_indices, context_word_indices, negative_word_indices):
-        # 查找中心词和上下文词的嵌入
-        center_embeds = self.center_embeddings(center_word_indices)
-        context_embeds = self.context_embeddings(context_word_indices)
-
-        # 计算正样本对的得分
-        positive_scores = torch.sum(center_embeds * context_embeds, dim=1)
-        # 使用logsigmoid处理正样本得分
-        log_target = F.logsigmoid(positive_scores)
-
-        # 查找负样本的嵌入并计算得分
-        negative_embeds = self.context_embeddings(negative_word_indices)
-        # 负样本得分的计算稍有不同，需要额外的维度操作
-        negative_scores = torch.bmm(negative_embeds, center_embeds.unsqueeze(2)).squeeze(2)
-        # 使用logsigmoid处理负样本得分
-        sum_log_sampled = F.logsigmoid(-1 * negative_scores)
-
-        # 损失是正样本和负样本得分的logsigmoid之和的负数
-        loss = -1 * (log_target.sum() + sum_log_sampled.sum()) / (len(positive_scores) + len(negative_scores))
-
-        return loss
-
-    # 前向传播代码保持不变
-
-    def init_weights(self):
-        # Xavier初始化的一种常见选择是使用均匀分布
-        initrange = 0.5 / self.embedding_dim
-        self.center_embeddings.weight.data.uniform_(-initrange, initrange)
-        self.context_embeddings.weight.data.uniform_(-initrange, initrange)
+from model import SGNSModel
+from data_pre import Data_prepare
 
 
 class Word2VecDataset(Dataset):
@@ -76,85 +26,12 @@ class Word2VecDataset(Dataset):
                                                                                                              dtype=torch.long)
 
 
-class Data_prepare:
-
-    def __init__(self, stopwords_path, train_path, window_size):
-        self.stopwords_path = stopwords_path
-        self.train_path = train_path
-        self.window_size = window_size
-        self.processed_sentences = None
-        self.vocab = None
-
-    # 分词
-    def preprocess_file(self):
-        """从文件中读取文本并预处理：去除停用词"""
-        with open(self.stopwords_path, 'r', encoding='utf-8') as f:
-            stopwords = set([line.strip() for line in f])
-        processed_sentences = []
-        with open(self.train_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                words = line.strip().split()
-                filtered_words = [word for word in words if word not in stopwords and word.strip() != '']
-                processed_sentences.append(" ".join(filtered_words))
-        self.processed_sentences = processed_sentences
-        return processed_sentences
-
-    # 构建词汇表
-    def build_vocab(self):
-        vocab = {}
-        for sentence in self.processed_sentences:
-            for word in sentence.split():
-                if word not in vocab:
-                    vocab[word] = len(vocab)
-        self.vocab = vocab
-        return vocab
-
-    def generate_training_data(self, num_negative_samples=5):
-        positive_pairs = []
-        negative_samples = []
-
-        # 生成所有可能的正样本对
-        for sentence in self.processed_sentences:
-            words = sentence.split()
-            for i, center_word in enumerate(words):
-                center_word_index = self.vocab[center_word]
-                for j in range(max(0, i - self.window_size), min(i + self.window_size + 1, len(words))):
-                    if i != j:
-                        context_word = words[j]
-                        context_word_index = self.vocab[context_word]
-                        positive_pairs.append((center_word_index, context_word_index))
-
-        # 生成负样本
-        vocab_indices = list(self.vocab.values())
-        for _ in range(len(positive_pairs)):
-            negatives = []
-            while len(negatives) < num_negative_samples:
-                negative = random.choice(vocab_indices)
-                if negative not in negatives:  # 确保负样本是唯一的
-                    negatives.append(negative)
-            negative_samples.append(negatives)
-
-        return positive_pairs, negative_samples
-
-    def pre_data(self):
-        self.preprocess_file()
-        self.build_vocab()
-        positive_pairs, negative_samples = self.generate_training_data()
-
-        # 输出样本数量进行检查
-        print(f"词汇储量为：{len(self.vocab)}")
-        print(f"总共有{len(positive_pairs)}个正样本对")
-        print(f"每个正样本对对应{len(negative_samples[0])}个负样本")
-
-        return positive_pairs, negative_samples, len(self.vocab), self.vocab
-
-
 # 定义训练过程
-def train_process(model, data_loader, optimizer, device, epochs=15):
+def train_process(model, data_loader, optimizer, device, epochs=5):
     model.train()
     loss_values = []  # 用于存储每个epoch的平均损失
-    batch_loss_values = []  # 用于存储每200个batch的损失
     for epoch in range(epochs):
+        batch_loss_values = []  # 用于存储每200个batch的损失
         start_time = time.time()  # 记录每个epoch开始的时间
         total_loss = 0
         for batch_idx, (center, context, negatives) in enumerate(data_loader):
@@ -170,12 +47,12 @@ def train_process(model, data_loader, optimizer, device, epochs=15):
             total_loss += loss.item()
 
             # 特定批次打印时间和损失信息
-            if (batch_idx + 1) % 200 == 0:  # 假设每200个batch打印一次
+            if (batch_idx + 1) % 5 == 0:  # 假设每200个batch打印一次
                 elapsed = time.time() - start_time
                 print(
                     f"Epoch {epoch + 1}, Batch {batch_idx + 1}, Current Loss: {loss.item()}, Time elapsed: {elapsed:.2f} seconds")
                 batch_loss_values.append(loss.item())  # 将当前损失加入列表
-            if (batch_idx + 1) % 5000 == 0:  # 假设每200个batch打印一次
+            if (batch_idx + 1) % 500 == 0:  # 假设每500个batch打印一次
                 # 保存模型和词向量
                 # 保存模型参数
                 torch.save(model.state_dict(), 'sgns_model.pth')
@@ -185,7 +62,7 @@ def train_process(model, data_loader, optimizer, device, epochs=15):
 
                 test(test_path, embedding_dim)
 
-        # 绘制每200个batch的损失变化
+        # 绘制每个epoch的损失变化
         plt.figure(figsize=(10, 5))
         plt.plot(batch_loss_values, label='Batch Loss')
         plt.xlabel('Batch (every 200th)')
@@ -193,8 +70,12 @@ def train_process(model, data_loader, optimizer, device, epochs=15):
         plt.title('Loss During Training (per 200 batches)')
         plt.legend()
         plt.grid(True)
-        plt.savefig(f'../result/batch_loss_epoch{epoch+1}.png')  # 保存损失图像到本地
+        plt.savefig(f'../result/batch_loss_epoch{epoch + 1}.png')  # 保存损失图像到本地
         plt.show()  # 显示图像
+
+        average_loss = total_loss / len(data_loader)
+        print(f"Epoch {epoch + 1}, Loss: {average_loss}")
+        loss_values.append(average_loss)
 
     # 保存模型和词向量
     # 保存模型参数
@@ -204,10 +85,6 @@ def train_process(model, data_loader, optimizer, device, epochs=15):
     torch.save(word_vectors, 'word_vectors.pth')
 
     test(test_path, embedding_dim)
-
-    average_loss = total_loss / len(data_loader)
-    print(f"Epoch {epoch + 1}, Loss: {average_loss}")
-    loss_values.append(average_loss)
 
     # 绘制损失图
     plt.figure(figsize=(10, 5))
@@ -232,6 +109,9 @@ def cosine_similarity(vec1, vec2):
 # 进行预测
 def predict_similarity(test_path, vocab, word_vectors):
     similarities_sgns = []
+    total_similarity = 0  # 用于累计所有的相似度值
+    valid_pairs = 0  # 有效的词对数量
+
     with open(test_path, 'r', encoding='utf-8') as f:
         for line in f:
             word1, word2 = line.strip().split()
@@ -242,11 +122,21 @@ def predict_similarity(test_path, vocab, word_vectors):
                 vec2 = word_vectors[index2]
                 similarity = cosine_similarity(vec1, vec2).item()
                 similarities_sgns.append((word1, word2, similarity))
+                total_similarity += similarity  # 累加相似度值
+                valid_pairs += 1  # 有效词对数量加一
                 print(f"{word1} 和 {word2} 的余弦相似度是：{similarity}")
             else:
                 similarities_sgns.append((word1, word2, 0))
                 print(f"{word1} 和 {word2} 的余弦相似度是：0（至少一个词不在词汇表中）")
-    return similarities_sgns
+    if valid_pairs > 0:
+        average_similarity = total_similarity / valid_pairs  # 计算平均相似度
+        print(f"平均余弦相似度是：{average_similarity}")
+        return similarities_sgns, average_similarity
+
+    else:
+        print("没有有效的词对来计算平均余弦相似度。")
+        return similarities_sgns, -1
+
 
 
 def test(test_path, embedding_dim):
@@ -263,7 +153,7 @@ def test(test_path, embedding_dim):
     model.load_state_dict(torch.load('sgns_model.pth'))
 
     # 进行预测
-    similarities_sgns = predict_similarity(test_path, vocab, word_vectors)
+    similarities_sgns, average_similarity = predict_similarity(test_path, vocab, word_vectors)
 
     # 读取原始文件
     with open('../result/similarties.txt', 'r', encoding='utf-8') as file:
@@ -279,12 +169,31 @@ def test(test_path, embedding_dim):
         file.writelines(modified_lines)
 
 
-def train(stopwords_path, train_path, window_size, embedding_dim):
-    # 预处理获取训练数据
-    data_prepare = Data_prepare(stopwords_path, train_path, window_size)
-    positive_pairs, negative_samples, len_vocab, vocab = data_prepare.pre_data()
+# 加载预处理数据
+def load_preprocessed_data(filepath):
+    with open(filepath, 'rb') as f:
+        data = pickle.load(f)
+    print(f"Preprocessed data loaded from {filepath}")
+    return data['positive_pairs'], data['negative_samples'], data['vocab']
+
+
+def train(stopwords_path, train_path, window_size, embedding_dim, num_negative_samples):
+    # 首先检查预处理文件是否存在
+    filepath = 'preprocessed_data.pkl'
+    if os.path.exists(filepath):
+        positive_pairs, negative_samples, vocab = load_preprocessed_data(filepath)
+        len_vocab = len(vocab)
+        # 输出样本数量进行检查
+        print(f"词汇储量为：{len(vocab)}")
+        print(f"总共有{len(positive_pairs)}个正样本对")
+        print(f"每个正样本对对应{len(negative_samples[0])}个负样本")
+    # 如果不存在，预处理获取训练数据
+    else:
+        data_prepare = Data_prepare(stopwords_path, train_path, window_size, num_negative_samples)
+        positive_pairs, negative_samples, len_vocab, vocab = data_prepare.pre_data()
+
     dataset = Word2VecDataset(positive_pairs, negative_samples)
-    data_loader = DataLoader(dataset, batch_size=16, shuffle=True)
+    data_loader = DataLoader(dataset, batch_size=5096, shuffle=True)
 
     # 保存词汇表
     with open('vocab.pkl', 'wb') as f:
@@ -298,8 +207,8 @@ def train(stopwords_path, train_path, window_size, embedding_dim):
     # 定义设备
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
-    # 定义优化器
-    optimizer = optim.Adam(model.parameters(), lr=0.003)
+    # 定义优化器，并应用L2正则化
+    optimizer = optim.Adam(model.parameters(), lr=0.05, weight_decay=1e-5)
 
     # 训练
     train_process(model, data_loader, optimizer, device)
@@ -309,8 +218,9 @@ if __name__ == '__main__':
     stopwords_path = '../data/stopwords.txt'
     train_path = '../data/training.txt'
     test_path = '../data/pku_sim_test.txt'
-    window_size = 5
+    window_size = 2
+    embedding_dim = 500
+    num_negative_samples = 20
 
-    embedding_dim = 200
-    train(stopwords_path, train_path, window_size, embedding_dim)
+    train(stopwords_path, train_path, window_size, embedding_dim, num_negative_samples)
     test(test_path, embedding_dim)

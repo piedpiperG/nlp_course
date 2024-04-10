@@ -5,12 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f5cd456-afbf-492f-adab-9854a151801c" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/.gitgnore" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/自然语言处理.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/自然语言处理.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/code/svd.py" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/code/svd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/code/training_loss.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/data/pretest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/data/pretest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/result/similarties.txt" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/result/similarties.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,6 +57,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -47,6 +65,51 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\A-学校事务\自然语言处理" />
     </key>
+  </component>
+  <component name="RunManager" selected="Python.sgns">
+    <configuration name="sgns" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="自然语言处理" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python 测试 (sgns.py 内)" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="自然语言处理" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.sgns" />
+        <item itemvalue="Python 测试.Python 测试 (sgns.py 内)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -57,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712460365766</updated>
       <workItem from="1712460366938" duration="392000" />
-      <workItem from="1712460776765" duration="221000" />
+      <workItem from="1712460776765" duration="6336000" />
     </task>
     <servers />
   </component>
@@ -74,5 +137,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/$.coverage" NAME=" 覆盖结果" MODIFIED="1712461554810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
+    <SUITE FILE_PATH="coverage/$sgns.coverage" NAME="sgns 覆盖结果" MODIFIED="1712468703909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
   </component>
 </project>

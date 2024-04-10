@@ -1,0 +1,7 @@
+
+        Total non-zero singular values: 9406
+        Selected singular values: 5
+        Sum of selected singular values: 102755.1171875
+        Sum of all singular values: 463686.0625
+        Ratio: 0.22160492837429047
+            
