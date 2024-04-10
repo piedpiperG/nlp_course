@@ -15,13 +15,11 @@ class Data_prepare:
     # 分词
     def preprocess_file(self):
         """从文件中读取文本并预处理：去除停用词"""
-        with open(self.stopwords_path, 'r', encoding='utf-8') as f:
-            stopwords = set([line.strip() for line in f])
         processed_sentences = []
         with open(self.train_path, 'r', encoding='utf-8') as f:
             for line in f:
                 words = line.strip().split()
-                filtered_words = [word for word in words if word not in stopwords and word.strip() != '']
+                filtered_words = [word for word in words if word.strip() != '']
                 processed_sentences.append(" ".join(filtered_words))
         self.processed_sentences = processed_sentences
         return processed_sentences
