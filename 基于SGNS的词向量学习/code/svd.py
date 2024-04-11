@@ -6,7 +6,7 @@ from scipy.sparse.linalg import svds
 
 class Svd_dec:
 
-    def __init__(self, stopwords_path, train_path, test_path, window_size=5, k=5):
+    def __init__(self, stopwords_path, train_path, test_path, window_size=5, k=100):
         self.stopwords_path = stopwords_path
         self.train_path = train_path
         self.test_path = test_path
@@ -31,7 +31,7 @@ class Svd_dec:
                             word_frequency[word] = 1
                 processed_sentences.append(" ".join(filtered_words))
         # 移除低频词
-        min_frequency = 20  # 设定最低频率阈值
+        min_frequency = 10  # 设定最低频率阈值
         filtered_vocab = {word for word, freq in word_frequency.items() if freq >= min_frequency}
         return processed_sentences, filtered_vocab
 

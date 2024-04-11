@@ -27,7 +27,7 @@ class Word2VecDataset(Dataset):
 
 
 # 定义训练过程
-def train_process(model, data_loader, optimizer, device, epochs=5):
+def train_process(model, data_loader, optimizer, device, epochs=1):
     model.train()
     loss_values = []  # 用于存储每个epoch的平均损失
     for epoch in range(epochs):
@@ -47,12 +47,12 @@ def train_process(model, data_loader, optimizer, device, epochs=5):
             total_loss += loss.item()
 
             # 特定批次打印时间和损失信息
-            if (batch_idx + 1) % 5 == 0:  # 假设每200个batch打印一次
+            if (batch_idx + 1) % 1 == 0:  # 假设每200个batch打印一次
                 elapsed = time.time() - start_time
                 print(
                     f"Epoch {epoch + 1}, Batch {batch_idx + 1}, Current Loss: {loss.item()}, Time elapsed: {elapsed:.2f} seconds")
                 batch_loss_values.append(loss.item())  # 将当前损失加入列表
-            if (batch_idx + 1) % 500 == 0:  # 假设每500个batch打印一次
+            if (batch_idx + 1) % 100 == 0:  # 假设每500个batch打印一次
                 # 保存模型和词向量
                 # 保存模型参数
                 torch.save(model.state_dict(), 'sgns_model.pth')
@@ -60,7 +60,7 @@ def train_process(model, data_loader, optimizer, device, epochs=5):
                 word_vectors = model.center_embeddings.weight.data
                 torch.save(word_vectors, 'word_vectors.pth')
 
-                test(test_path, embedding_dim)
+                # test(test_path, embedding_dim)
 
         # 绘制每个epoch的损失变化
         plt.figure(figsize=(10, 5))
@@ -124,10 +124,10 @@ def predict_similarity(test_path, vocab, word_vectors):
                 similarities_sgns.append((word1, word2, similarity))
                 total_similarity += similarity  # 累加相似度值
                 valid_pairs += 1  # 有效词对数量加一
-                print(f"{word1} 和 {word2} 的余弦相似度是：{similarity}")
+                # print(f"{word1} 和 {word2} 的余弦相似度是：{similarity}")
             else:
                 similarities_sgns.append((word1, word2, 0))
-                print(f"{word1} 和 {word2} 的余弦相似度是：0（至少一个词不在词汇表中）")
+                # print(f"{word1} 和 {word2} 的余弦相似度是：0（至少一个词不在词汇表中）")
     if valid_pairs > 0:
         average_similarity = total_similarity / valid_pairs  # 计算平均相似度
         print(f"平均余弦相似度是：{average_similarity}")
@@ -208,7 +208,7 @@ def train(stopwords_path, train_path, window_size, embedding_dim, num_negative_s
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     # 定义优化器，并应用L2正则化
-    optimizer = optim.Adam(model.parameters(), lr=0.05, weight_decay=1e-5)
+    optimizer = optim.Adam(model.parameters(), lr=0.09, weight_decay=1e-5)
 
     # 训练
     train_process(model, data_loader, optimizer, device)
@@ -219,8 +219,8 @@ if __name__ == '__main__':
     train_path = '../data/training.txt'
     test_path = '../data/pku_sim_test.txt'
     window_size = 2
-    embedding_dim = 500
+    embedding_dim = 200
     num_negative_samples = 20
 
     train(stopwords_path, train_path, window_size, embedding_dim, num_negative_samples)
-    test(test_path, embedding_dim)
+    # test(test_path, embedding_dim)
