@@ -138,7 +138,6 @@ def predict_similarity(test_path, vocab, word_vectors):
         return similarities_sgns, -1
 
 
-
 def test(test_path, embedding_dim):
     # 加载词向量
     word_vectors = torch.load('word_vectors.pth')

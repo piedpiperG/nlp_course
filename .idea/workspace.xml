@@ -5,18 +5,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f5cd456-afbf-492f-adab-9854a151801c" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/Reading_work/10-notes.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reading_work/10.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/submit/2021213382.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/bert_model/bert-base-chinese/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/bert_model/bert-base-chinese/pytorch_model.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/bert_model/bert-base-chinese/tokenizer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/bert_model/bert-base-chinese/vocab.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/bert_model/tokenizer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/bert_model/vocab.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/training_loss_plot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/data/dev.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/data/dev_TAG.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/data/test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/data/train.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/data/train_TAG.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/Crf on the top of Bilstm.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/Io/data_loader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/config/args.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/main/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/model/pytorch_pretrained_model/bert_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/model/vocab.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/net/bert_ner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/net/crf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/output/images/loss_acc.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/output/logs/all.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/preprocessing/data_processor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/pytorch_pretrained_bert/file_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/pytorch_pretrained_bert/modeling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/pytorch_pretrained_bert/optimization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/pytorch_pretrained_bert/tokenization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/run_bert_ner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/train/train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/util/Logginger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/util/model_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/util/plot_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/sample/Bert_Chinese_Ner_pytorch-master/bert_ner/util/porgress_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/作业要求.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/自然语言处理.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/自然语言处理.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/code/svd.py" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/code/svd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/code/training_loss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/data/pretest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/data/pretest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/基于SGNS的词向量学习/result/similarties.txt" beforeDir="false" afterPath="$PROJECT_DIR$/基于SGNS的词向量学习/result/similarties.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
     <envs>
@@ -52,7 +98,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/A-学校事务/自然语言处理",
+    "last_opened_file_path": "D:/A-学校事务/自然语言处理/序列标注",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,10 +109,33 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\A-学校事务\自然语言处理\序列标注" />
       <recent name="D:\A-学校事务\自然语言处理" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.sgns">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="自然语言处理" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/序列标注/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/序列标注/code/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="sgns" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="自然语言处理" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,6 +150,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/基于SGNS的词向量学习/code/sgns.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="自然语言处理" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/序列标注/code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/序列标注/code/utils.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -106,6 +197,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.utils" />
         <item itemvalue="Python.sgns" />
         <item itemvalue="Python 测试.Python 测试 (sgns.py 内)" />
       </list>
@@ -121,6 +214,9 @@
       <updated>1712460365766</updated>
       <workItem from="1712460366938" duration="392000" />
       <workItem from="1712460776765" duration="6336000" />
+      <workItem from="1714722392506" duration="3208000" />
+      <workItem from="1714897559324" duration="618000" />
+      <workItem from="1715082199509" duration="11092000" />
     </task>
     <servers />
   </component>
@@ -139,7 +235,9 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/$main.coverage" NAME="main 覆盖结果" MODIFIED="1715092850254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
     <SUITE FILE_PATH="coverage/$.coverage" NAME=" 覆盖结果" MODIFIED="1712461554810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
+    <SUITE FILE_PATH="coverage/$utils.coverage" NAME="utils 覆盖结果" MODIFIED="1715084703239" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
     <SUITE FILE_PATH="coverage/$sgns.coverage" NAME="sgns 覆盖结果" MODIFIED="1712468703909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
   </component>
 </project>
