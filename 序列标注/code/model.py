@@ -1,17 +1,19 @@
-import torch
 import torch.nn as nn
 from transformers import AutoModel
 
 
 class BertForNER(nn.Module):
-    def __init__(self, bert_model, num_labels, hidden_size=768):
+    def __init__(self, bert_model, num_labels, hidden_size=768, dropout_prob=0.1, loss_type='ce'):
         super(BertForNER, self).__init__()
         self.bert = AutoModel.from_pretrained(bert_model)
+        self.dropout = nn.Dropout(dropout_prob)  # 添加Dropout层
         self.classifier = nn.Linear(hidden_size, num_labels)
-        self.num_labels = num_labels  # 确保这一行存在
+        self.num_labels = num_labels
 
-    def forward(self, input_ids, attention_mask=None):
+    def forward(self, input_ids, attention_mask=None, labels=None):
         outputs = self.bert(input_ids, attention_mask=attention_mask)
         sequence_output = outputs.last_hidden_state
+        sequence_output = self.dropout(sequence_output)  # 应用Dropout
         logits = self.classifier(sequence_output)
+
         return logits

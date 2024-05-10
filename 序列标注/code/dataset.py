@@ -22,6 +22,10 @@ class NERDataset(Dataset):
             truncation=True,
             return_tensors='pt'
         )
+
+        # 打印编码后的结果
+        print("Encoded output:", encoded)
+
         input_ids = encoded['input_ids'].squeeze(0)
         attention_mask = encoded['attention_mask'].squeeze(0)
 

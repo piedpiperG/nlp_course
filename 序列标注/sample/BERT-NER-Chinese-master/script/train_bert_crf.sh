@@ -1,0 +1,25 @@
+python train.py \
+    --device gpu \
+    --output_path output/bert_crf \
+    --weight_decay 0.01 \
+    --loss_type ce \
+    --lr 5e-5 \
+    --crf_lr 5e-3 \
+    --eps 1.0e-08 \
+    --epochs 10 \
+    --batch_size_train 128 \
+    --batch_size_eval 256 \
+    --num_workers 0 \
+    --eval_step 25 \
+    --max_len 150 \
+    --data_path datasets/cner/ \
+    --dataset_name cner \
+    --pretrain_model_path pretrain_model/bert-base-chinese \
+    --seed 42 \
+    --markup bios \
+    --grad_acc_step 1 \
+    --max_grad_norm 1.0 \
+    --num_workers 0 \
+    --warmup_proportion 0.1 \
+    --do_train \
+    --do_eval
