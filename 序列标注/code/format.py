@@ -1,36 +1,25 @@
-def adjust_output_format(source_file, output_file, adjusted_output_file):
-    # 读取源文件
-    with open(source_file, 'r', encoding='utf-8') as file:
-        source_data = file.readlines()
+def adjust_format(test_file_path, output_file_path, adjusted_output_path):
+    # 读取测试集文件，以确定每一行的长度
+    with open(test_file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+        line_lengths = [len(line.split()) for line in lines]
 
     # 读取输出文件
-    with open(output_file, 'r', encoding='utf-8') as file:
-        output_data = [line.strip() for line in file.readlines()]
+    with open(output_file_path, 'r', encoding='utf-8') as file:
+        output_labels = [line.strip() for line in file]
 
-    # 准备调整格式后的输出
+    # 调整输出格式，匹配测试集的行结构
     adjusted_output = []
-    output_index = 0
+    index = 0
+    for length in line_lengths:
+        adjusted_output.append(" ".join(output_labels[index:index + length]))
+        index += length
 
-    for line in source_data:
-        source_line = line.strip()
-        if not source_line:
-            # 如果源数据行是空的，直接添加一个空行到调整后的输出
-            adjusted_output.append('\n')
-        else:
-            # 否则，根据源数据行中的元素数量调整输出数据
-            tokens = source_line.split()
-            adjusted_line = ' '.join(output_data[output_index:output_index + len(tokens)])
-            adjusted_output.append(adjusted_line + '\n')
-            output_index += len(tokens)
-
-    # 写入调整后的输出到新文件
-    with open(adjusted_output_file, 'w', encoding='utf-8') as file:
-        file.writelines(adjusted_output)
+    # 将调整后的输出写入新文件
+    with open(adjusted_output_path, 'w', encoding='utf-8') as file:
+        for line in adjusted_output:
+            file.write(line + '\n')
 
 
-# 使用示例
-source_file_path = '../data/dev_TAG.txt'  # 源数据文件路径
-output_file_path = 'predictions_epoch_1_batch_6000.txt'  # 当前输出数据文件路径
-adjusted_output_file_path = 'adjusted_output.txt'  # 调整后的输出数据文件路径
-
-adjust_output_format(source_file_path, output_file_path, adjusted_output_file_path)
+# 调用函数，需要提供测试集路径、输出文件路径和调整后的输出文件路径
+adjust_format('../data/dev.txt', 'predictions.txt', 'adjusted.txt')

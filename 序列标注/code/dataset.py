@@ -15,6 +15,8 @@ class NERDataset(Dataset):
     def __getitem__(self, index):
         sentence = self.texts[index]
         label = self.labels[index]
+
+        # 编码文本
         encoded = self.tokenizer.encode_plus(
             sentence,
             max_length=self.max_length,
@@ -23,14 +25,15 @@ class NERDataset(Dataset):
             return_tensors='pt'
         )
 
-        # 打印编码后的结果
-        print("Encoded output:", encoded)
-
         input_ids = encoded['input_ids'].squeeze(0)
         attention_mask = encoded['attention_mask'].squeeze(0)
 
-        # 调整标签以匹配特殊令牌
-        label_ids = [-100] + label[:self.max_length - 2] + [-100]  # 确保不超过 max_length
+        # 处理标签
+        if isinstance(label, list):
+            label_ids = [-100] + label[:self.max_length - 2] + [-100]
+        else:  # 假设label是单个整数
+            label_ids = [-100] * self.max_length
+
         label_ids += [-100] * (self.max_length - len(label_ids))  # 填充到 max_length
 
         return input_ids, attention_mask, torch.tensor(label_ids, dtype=torch.long)
