@@ -22,4 +22,4 @@ def adjust_format(test_file_path, output_file_path, adjusted_output_path):
 
 
 # 调用函数，需要提供测试集路径、输出文件路径和调整后的输出文件路径
-adjust_format('../data/dev.txt', 'predictions.txt', 'adjusted.txt')
+adjust_format('../data/dev.txt', 'epoch_0_predictions.txt', 'adjusted.txt')

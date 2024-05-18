@@ -5,47 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f5cd456-afbf-492f-adab-9854a151801c" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/序列标注/code/eva.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/code/format.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/config/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/config/vocab.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/datasets/cner/dev.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/datasets/cner/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/datasets/cner/train.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/image/f1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/image/loss.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/losses/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/losses/focal_loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/losses/label_smoothing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/metrics/ner_metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models/bert.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models/modules.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models/ner_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models/sublayers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/output/tensorboard/BERT+Sotfmax1/events.out.tfevents.1645870057.c6aff841-e6b1-4533-a8e2-253fb803a791.20442.0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/output/tensorboard/BERT+Sotfmax2/events.out.tfevents.1645869974.93b328ad-8ae4-4d3b-bfae-5f8194941c6b.15127.0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/output/tensorboard/BERT+Sotfmax3/events.out.tfevents.1645875677.93b328ad-8ae4-4d3b-bfae-5f8194941c6b.23905.0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/output/tensorboard/BERT-CRF/events.out.tfevents.1646387015.8e41828e-5ea7-4a3c-a184-166c56d7f0a7.9763.0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/processors/processor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/script/train_bert_crf.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/script/train_bert_softmax.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/script/train_bert_softmax_not_pretrain.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/script/train_my_model.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/train_bert_crf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/train_my_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/utils/get_entity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/self_bert_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/code/train_selfmodel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/序列标注/mybert/model/bert_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/自然语言处理.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/自然语言处理.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/training_loss_plot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/adjusted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/adjusted.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/epoch_0_predictions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/epoch_0_predictions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/format.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/format.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/main.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,31 +55,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/A-学校事务/自然语言处理/序列标注/code&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/A-学校事务/自然语言处理/序列标注/bert_model/bert-base-chinese/vocab",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\A-学校事务\自然语言处理\序列标注\bert_model\bert-base-chinese\vocab" />
       <recent name="D:\A-学校事务\自然语言处理\序列标注\code" />
+      <recent name="D:\A-学校事务\自然语言处理\序列标注\te_data" />
       <recent name="D:\A-学校事务\自然语言处理\序列标注\sample" />
       <recent name="D:\A-学校事务\自然语言处理\序列标注" />
-      <recent name="D:\A-学校事务\自然语言处理" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\A-学校事务\自然语言处理\序列标注\te_data" />
+      <recent name="D:\A-学校事务\自然语言处理\序列标注\code\predictions" />
+      <recent name="D:\A-学校事务\自然语言处理\序列标注\code" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.bert">
-    <configuration name="bert" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.acc">
+    <configuration name="acc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="自然语言处理" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -119,12 +93,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/序列标注/code" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models/bert.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/序列标注/code/acc.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,7 +151,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="train_selfmodel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="自然语言处理" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -190,7 +164,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/序列标注/code/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/序列标注/code/train_selfmodel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -223,11 +197,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.bert" />
+        <item itemvalue="Python.acc" />
         <item itemvalue="Python.format" />
-        <item itemvalue="Python.eva" />
+        <item itemvalue="Python.train_selfmodel" />
         <item itemvalue="Python.utils" />
-        <item itemvalue="Python.main" />
+        <item itemvalue="Python.eva" />
       </list>
     </recent_temporary>
   </component>
@@ -252,7 +226,18 @@
       <workItem from="1715157739049" duration="12188000" />
       <workItem from="1715180884387" duration="2844000" />
       <workItem from="1715249067010" duration="42000" />
-      <workItem from="1715326866770" duration="691000" />
+      <workItem from="1715326866770" duration="22026000" />
+      <workItem from="1715410652244" duration="20000" />
+      <workItem from="1715592672764" duration="1288000" />
+      <workItem from="1715598333330" duration="8415000" />
+      <workItem from="1715653065236" duration="5090000" />
+      <workItem from="1715688724226" duration="2384000" />
+      <workItem from="1715703226903" duration="2295000" />
+      <workItem from="1715738578023" duration="91000" />
+      <workItem from="1715738683488" duration="6561000" />
+      <workItem from="1715784172343" duration="2470000" />
+      <workItem from="1715837607693" duration="2125000" />
+      <workItem from="1716008409519" duration="12674000" />
     </task>
     <servers />
   </component>
@@ -273,10 +258,12 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/$main.coverage" NAME="main 覆盖结果" MODIFIED="1715092850254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
     <SUITE FILE_PATH="coverage/$bert.coverage" NAME="bert 覆盖结果" MODIFIED="1715327300689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/sample/BERT-NER-Chinese-master/models" />
-    <SUITE FILE_PATH="coverage/$eva.coverage" NAME="eva 覆盖结果" MODIFIED="1715171647836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
+    <SUITE FILE_PATH="coverage/$eva.coverage" NAME="eva 覆盖结果" MODIFIED="1715656750635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
+    <SUITE FILE_PATH="coverage/$acc.coverage" NAME="acc 覆盖结果" MODIFIED="1716024694127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
     <SUITE FILE_PATH="coverage/$.coverage" NAME=" 覆盖结果" MODIFIED="1712461554810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
-    <SUITE FILE_PATH="coverage/$format.coverage" NAME="format 覆盖结果" MODIFIED="1715181426395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
-    <SUITE FILE_PATH="coverage/$utils.coverage" NAME="utils 覆盖结果" MODIFIED="1715170790057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
+    <SUITE FILE_PATH="coverage/$format.coverage" NAME="format 覆盖结果" MODIFIED="1716024689231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
+    <SUITE FILE_PATH="coverage/$utils.coverage" NAME="utils 覆盖结果" MODIFIED="1715744834332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
     <SUITE FILE_PATH="coverage/$sgns.coverage" NAME="sgns 覆盖结果" MODIFIED="1712468703909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/基于SGNS的词向量学习/code" />
+    <SUITE FILE_PATH="coverage/$train_selfmodel.coverage" NAME="train_selfmodel 覆盖结果" MODIFIED="1716022829184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/序列标注/code" />
   </component>
 </project>
