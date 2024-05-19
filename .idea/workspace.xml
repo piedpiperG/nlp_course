@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f5cd456-afbf-492f-adab-9854a151801c" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/序列标注/code/self_bert_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/code/train_selfmodel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/序列标注/mybert/model/bert_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/自然语言处理.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/自然语言处理.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/adjusted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/adjusted.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/epoch_0_predictions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/epoch_0_predictions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/format.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/format.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/序列标注/code/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/self_bert_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/self_bert_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/train_selfmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/train_selfmodel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/序列标注/code/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/序列标注/code/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,21 +52,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/A-学校事务/自然语言处理/序列标注/bert_model/bert-base-chinese/vocab",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/A-学校事务/自然语言处理/序列标注/bert_model/bert-base-chinese/vocab&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\A-学校事务\自然语言处理\序列标注\bert_model\bert-base-chinese\vocab" />
@@ -237,7 +234,8 @@
       <workItem from="1715738683488" duration="6561000" />
       <workItem from="1715784172343" duration="2470000" />
       <workItem from="1715837607693" duration="2125000" />
-      <workItem from="1716008409519" duration="12674000" />
+      <workItem from="1716008409519" duration="19606000" />
+      <workItem from="1716116147075" duration="9350000" />
     </task>
     <servers />
   </component>

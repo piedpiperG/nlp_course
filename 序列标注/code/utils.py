@@ -75,6 +75,27 @@ def create_tag_to_ix(tags):
     return {tag: i for i, tag in enumerate(tag_set)}
 
 
+def plot_losses_and_accuracy(losses, accuracies, file_path):
+    plt.figure(figsize=(10, 5))
+
+    # 绘制损失曲线
+    plt.plot(losses, label='Training Loss', color='red')  # 使用红色表示损失
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.title('Loss and Accuracy During Training')
+    plt.legend(loc='upper left')
+    plt.grid(True)
+
+    # 创建双轴，绘制准确率曲线
+    ax2 = plt.gca().twinx()
+    ax2.plot(accuracies, label='Accuracy', color='blue')  # 使用蓝色表示准确率
+    ax2.set_ylabel('Accuracy')
+    ax2.legend(loc='upper right')
+
+    plt.savefig(file_path)  # 保存图像
+    plt.show()  # 显示图像
+
+
 def plot_losses(losses, file_path):
     plt.figure(figsize=(10, 5))
     plt.plot(losses, label='Training Loss')
@@ -129,8 +150,6 @@ if __name__ == "__main__":
     #     if len(test_texts[i]) > 128:
     #         print(f'texts{i}:{len(test_texts[i])}')
     #         print(test_texts[i])
-
-
 
     # texts = read_test_data('../data/dev.txt')
     # # 创建与 texts 形状相同但元素全为 1 的 labels 数组
